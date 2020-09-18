@@ -5,7 +5,7 @@ spring:
         git:
           uri: ${service_springcloud_configserver}
           default-label: master
-          search-paths: config-repository
+          search-paths: config-repository/{application}
 #          search-paths: {profile}
     consul:
       host: ${service_springcloud_consul_host}
