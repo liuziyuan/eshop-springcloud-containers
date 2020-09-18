@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  service-discovery:
+    image: consul
+    ports:
+      - "8500:8500"
+
+
+
