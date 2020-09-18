@@ -1,4 +1,4 @@
-# eshop-springcloud-containers
+# eshop-config-server
 
 # Getting Started
 
@@ -12,5 +12,4 @@ For further reference, please consider the following sections:
 ### Guides
 The following guides illustrate how to use some features concretely:
 
-* [Service Registration and Discovery](https://spring.io/guides/gs/service-registration-and-discovery/)
 * [Centralized Configuration](https://spring.io/guides/gs/centralized-configuration/)
