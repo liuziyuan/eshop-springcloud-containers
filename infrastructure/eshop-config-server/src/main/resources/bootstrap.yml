@@ -9,7 +9,7 @@ spring:
 #          search-paths: {profile}
     consul:
       host: ${service_springcloud_consul_host}
-      port: 8500
+      port: ${service_springcloud_consul_port}
       discovery:
         prefer-ip-address: true
 

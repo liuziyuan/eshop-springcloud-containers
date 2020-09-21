@@ -1,2 +1,3 @@
 service_springcloud_configserver: https://github.com/liuziyuan/eshop-springcloud-containers
 service_springcloud_consul_host: localhost
+service_springcloud_consul_port: 8500
