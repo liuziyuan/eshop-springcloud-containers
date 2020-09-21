@@ -1,6 +1,12 @@
 # eshop-config-server
 
 # Getting Started
+#### 1.build package by Maven from root pom.xml
+`mvn clean package`
+#### 2. build docker images by docker-compose
+`docker-compose build`
+#### 3. run projects by docker-compose
+`docker-compose up`
 
 ### Reference Documentation
 For further reference, please consider the following sections:
