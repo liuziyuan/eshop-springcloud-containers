@@ -9,6 +9,9 @@ services:
 
   config-server:
     image: eshop-config-server
+    build:
+      context: ./infrastructure/eshop-config-server
+      dockerfile: Dockerfile
     ports:
       - 8888:8888
     environment:
