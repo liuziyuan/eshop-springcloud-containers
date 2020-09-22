@@ -1,24 +1,47 @@
 version: '3.4'
 
 services:
-  service-discovery:
-    image: consul
-    ports:
-      - 8500:8500
-    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
-
-  config-server:
-    image: eshop-config-server
+  elasticsearch:
+    hostname: elasticsearch
     build:
-      context: ./infrastructure/eshop-config-server
-      dockerfile: Dockerfile
+      context: infrastructure/elasticsearch/
+    volumes:
+      - ./infrastructure/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
-      - 8888:8888
+      - 9200:9200
+      - 9300:9300
     environment:
-      CONFIG_SERVER: https://github.com/liuziyuan/eshop-springcloud-containers
-      CONSUL_HOST: host.docker.internal
-      CONSUL_PORT: 8500
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+
+  kibana:
+    hostname: kibana
+    build:
+      context: infrastructure/kibana/
+    volumes:
+      - ./infrastructure/kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - 5601:5601
     depends_on:
-      - service-discovery
+      - elasticsearch
+
+#  service-discovery:
+#    image: consul
+#    ports:
+#      - 8500:8500
+#    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+#
+#  config-server:
+#    image: eshop-config-server
+#    build:
+#      context: ./infrastructure/eshop-config-server
+#      dockerfile: Dockerfile
+#    ports:
+#      - 8888:8888
+#    environment:
+#      CONFIG_SERVER: https://github.com/liuziyuan/eshop-springcloud-containers
+#      CONSUL_HOST: host.docker.internal
+#      CONSUL_PORT: 8500
+#    depends_on:
+#      - service-discovery
 
 
