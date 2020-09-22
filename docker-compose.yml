@@ -19,17 +19,35 @@ services:
       context: infrastructure/kibana/
     volumes:
       - ./infrastructure/kibana/config/:/usr/share/kibana/config:ro
+    external_links:
+      - elasticsearch:elasticsearch
     ports:
       - 5601:5601
     depends_on:
       - elasticsearch
 
-#  service-discovery:
-#    image: consul
-#    ports:
-#      - 8500:8500
-#    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
-#
+  logstash:
+    hostname: logstash
+    build:
+      context: infrastructure/logstash/
+    volumes:
+      - ./infrastructure/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./infrastructure/logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "4560:4560"
+    external_links:
+      - elasticsearch:elasticsearch
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      - elasticsearch
+
+  service-discovery:
+    image: consul
+    ports:
+      - 8500:8500
+    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+
 #  config-server:
 #    image: eshop-config-server
 #    build:
