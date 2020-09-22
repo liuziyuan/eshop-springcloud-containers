@@ -48,18 +48,19 @@ services:
       - 8500:8500
     command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
 
-#  config-server:
-#    image: eshop-config-server
-#    build:
-#      context: ./infrastructure/eshop-config-server
-#      dockerfile: Dockerfile
-#    ports:
-#      - 8888:8888
-#    environment:
-#      CONFIG_SERVER: https://github.com/liuziyuan/eshop-springcloud-containers
-#      CONSUL_HOST: host.docker.internal
-#      CONSUL_PORT: 8500
-#    depends_on:
-#      - service-discovery
+  config-server:
+    image: eshop-config-server
+    build:
+      context: ./infrastructure/eshop-config-server
+      dockerfile: Dockerfile
+    ports:
+      - 8888:8888
+    environment:
+      CONFIG_SERVER: https://github.com/liuziyuan/eshop-springcloud-containers
+      CONSUL_HOST: host.docker.internal
+      CONSUL_PORT: 8500
+    depends_on:
+      - service-discovery
+      - logstash
 
 
